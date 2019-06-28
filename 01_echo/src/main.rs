@@ -1,6 +1,7 @@
 extern crate env_logger;
 extern crate log;
 
+mod tcp_client;
 mod tcp_server;
 
 use std::env;
@@ -29,8 +30,7 @@ fn main() {
                 tcp_server::serve(address).unwrap_or_else(|e| error!("{}", e));
             }
             "client" => {
-                unimplemented!();
-                // tcp_client::connect(address).unwrap_or_else(|e| error!("{}", e));
+                tcp_client::connect(address).unwrap_or_else(|e| error!("{}", e));
             }
             _ => {
                 missing_role();
