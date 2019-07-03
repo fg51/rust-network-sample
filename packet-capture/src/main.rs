@@ -95,14 +95,14 @@ fn ipv4_handler(ethernet: &EthernetPacket) {
     }
 }
 
-fn tcp_handler(packet: &GettableEndPoints) {
+fn tcp_handler(packet: &dyn GettableEndPoints) {
     let tcp = TcpPacket::new(packet.get_payload());
     if let Some(tcp) = tcp {
         print_packet_info(packet, &tcp, "TCP");
     }
 }
 
-fn print_packet_info(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) {
+fn print_packet_info(l3: &dyn GettableEndPoints, l4: &dyn GettableEndPoints, proto: &str) {
     println!(
         "Captured a {} packet from {}|{} to {}|{}\n",
         proto,
